@@ -1,0 +1,25 @@
+<div class="calculator-container">
+    <div class="calculator">
+        <div class="calculator__input">
+            <div class="calculator__input__operation-row">{{operation}}</div>
+            <div class="calculator__input__value-row">{{value}}</div>
+        </div>
+
+        <div class="buttons">
+            <div 
+                *ngFor="let rows of buttons"
+                class="row"
+            >
+                <button
+                    *ngFor="let button of rows"
+                    (click)="clickButton(button.handler, button.operationType)"
+                    type="button" 
+                    class="button"
+                    [ngClass]="button.classModifier"
+                >
+                    {{button.caption}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
