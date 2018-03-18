@@ -22,4 +22,22 @@
             </div>
         </div>
     </div>
+
+    <div class="calculator__calculations">
+        <table class="calculator__calculations__table">
+            <thead>
+                <tr>
+                    <th>CALCULATION</th>
+                    <th>DATE</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let calc of calculations">
+                    <td>{{calc.calculation}}</td>
+                    <td>{{calc.date}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

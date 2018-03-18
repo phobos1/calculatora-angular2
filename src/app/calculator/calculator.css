@@ -1,13 +1,18 @@
 .calculator-container {
     background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .calculator {
     padding: 10px;
+    margin-right: 15px;
     display: inline-block;
     border: 2px solid #ccc;
     background-color: #ebf5f9;
     width: auto;
+    margin-bottom: 15px;
 }
 
 .calculator__input {
@@ -63,4 +68,24 @@
 
 .button.button__2x {
     width: 85px;
+}
+
+.calculator__calculations {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.calculator__calculations__table {
+    min-width: 500px;
+}
+
+.calculator__calculations__table thead tr th,
+.calculator__calculations__table tbody tr td {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.calculator__calculations__table thead tr th {
+    text-align: left;
+    background-color: #efefef;
 }

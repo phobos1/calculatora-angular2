@@ -9,6 +9,9 @@ import {
 
     BUTTONS
 } from './calculator.constants';
+
+import { CalculatorService } from './calculator.service'; 
+
 import { isOperatorLast, isFullExpression } from './calculator.helpers';
 
 import './calculator.css';
@@ -16,18 +19,31 @@ import './calculator.css';
 
 @Component({
   selector: 'calculator',
+  providers: [ CalculatorService ],
   template: require('./calculator.component.html'),
 })
 export class CalculatorComponent {
+    calculatorService: CalculatorService;
     buttons: Array<Array<CaclulatorButton>>;
     value: string;
     operation: string;
+    calculations: CalculationsType;
 
-    constructor() {
+    constructor(calculatorService: CalculatorService) {
         this.value = '0';
         this.operation = '0';
-
         this.buttons = BUTTONS;
+        this.calculatorService = calculatorService;
+        this.updateCalculations();
+    }
+
+    private updateCalculations() {
+        this.calculatorService.getCalculations()
+            .subscribe(
+                (calculations) => {
+                    this.calculations = calculations;
+                }
+            );
     }
 
     public clickButton(handler: (value: string) => string, operationType: ButtonOperationType) {
@@ -46,12 +62,20 @@ export class CalculatorComponent {
             case OPERATION_EVALUATE:
                 if (isFullExpression(this.value)) {
                     this.operation = this.value;
-                    this.value = eval(`;(function() { return ${this.value}; })();`).toString();
+                    try {
+                        this.value = eval(`;(function() { return ${this.value}; })();`).toString();
+                        this.calculatorService.saveCalculation(this.operation)
+                            .subscribe((calculation: Calculation) => {
+                                this.updateCalculations();
+                            });
+                    }
+                    catch (e) {
+                        console.trace('Something went wrong', e);
+                    }
                 }
                 else {
                     alert('Invalid expression');
                 }
-
             default:
                 break;
         }

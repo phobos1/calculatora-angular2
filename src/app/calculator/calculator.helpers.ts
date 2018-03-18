@@ -14,7 +14,7 @@ export function isFullExpression(value: string): boolean {
 }
 
 export function canSetDot(value: string): boolean {
-    const canSetDotRegexp = /^(\(+)?-?(\d+$)|((\(+)?-?(\d+\.\d+(e\+)?\d+)|(\d+)([/*+-](\(+\-?)?(\.\d+(e\+)?\d+)|(\d+)(\)+)?)*[/*+-](\(+-?)\d+$)/;
+    const canSetDotRegexp = /^(\(+)?-?(\d+$)|((\(+)?-?(\d+\.\d+(e\+)?\d+)|(\d+)([/*+-](\(+\-?)?(\.\d+(e\+)?\d+)|(\d+)(\)+)?)*[/*+-](\(+-?)?\d+$)/;
     return canSetDotRegexp.test(value);
 }
 

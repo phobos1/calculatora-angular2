@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Improove test task. Calculator.",
   "license": "MIT",
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "devDependencies": {
     "@types/node": "9.4.7",
     "@types/rx": "^4.1.1",
